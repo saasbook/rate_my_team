@@ -1,3 +1,5 @@
+# https://bcourses.berkeley.edu/doc/api/live
+
 class Rater
 
   require 'canvas-api'
@@ -5,7 +7,7 @@ class Rater
   attr_reader :canvas, :course_id, :course_name, :student_id
   
   def initialize(params={})
-    @canvas = Canvas::API.new(:host => Figaro.canvas_host, :token => Figaro.canvas_api_key)
+    @canvas = Canvas::API.new(:host => Figaro.env.canvas_host, :token => Figaro.env.canvas_api_key)
     @student_id = params['custom_canvas_user_id']
     @course_id = params['custom_canvas_course_id']
     @course_name = params['context_title']

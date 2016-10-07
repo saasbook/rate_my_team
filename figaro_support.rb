@@ -1,16 +1,15 @@
 # Patch to make Figaro work with Sinatra (vs Rails)
-# see https://github.com/chytreg/sinatra-figaro/blob/master/application.rb
+
+require 'figaro'
 
 module Figaro
-  def path
-    @path ||= File.join(Application.settings.root, "application.yml")
-  end
-
-  def environment
-    Application.settings.environment
+  class Application
+    def path
+      @path ||= File.join(RateMyTeam.settings.root, "application.yml")
+    end
+    def environment
+      RateMyTeam.settings.environment
+    end
   end
 end
 
-Figaro.env.each do |key, value|
-  ENV[key] = value unless ENV.key?(key)
-end
